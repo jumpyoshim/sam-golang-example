@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    command: >
+      bash -c "cd cdk
+      && npm run build
+      && npx cdk synth --no-staging dev-api > cdk.out/sam.yml
+      && sam local start-api -t cdk.out/sam.yml --port 8800 --host 0.0.0.0"
+    volumes:
+      - .:/app
+    ports:
+      - "8800:8000"
+    env_file:
+      - .env
+    links:
+      - dynamodb-local
+
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    ports:
+      - 8801:8000
+    environment:
+      DEFAULT_REGION: ap-northeast-1
