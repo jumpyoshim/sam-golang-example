@@ -6,7 +6,7 @@ services:
     command: >
       bash -c "cd cdk
       && npm run build
-      && npx cdk synth --no-staging dev-api > cdk.out/sam.yml
+      && npx cdk synth --no-staging api > cdk.out/sam.yml
       && sam local start-api -t cdk.out/sam.yml --port 8800 --host 0.0.0.0"
     volumes:
       - .:/app
