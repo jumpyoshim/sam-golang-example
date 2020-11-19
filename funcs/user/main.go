@@ -2,32 +2,32 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"
-	"github.com/gin-gonic/gin"
 )
 
-var ginLambda *ginadapter.GinLambda
-
-func init() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
-	ginLambda = ginadapter.New(r)
+type Output struct {
+	Message string `json:"message"`
 }
 
 func Handler(
 	ctx context.Context,
 	req events.APIGatewayProxyRequest, // nolint: gocritic
-) (events.APIGatewayProxyResponse, error) {
-	// If no name is provided in the HTTP request body, throw an error
-	return ginLambda.ProxyWithContext(ctx, req)
+) (out events.APIGatewayProxyResponse, err error) {
+	o := Output{
+		Message: "ok",
+	}
+
+	b, err := json.Marshal(o)
+	if err != nil {
+		return out, err
+	}
+	return events.APIGatewayProxyResponse{
+		Body:       string(b),
+		StatusCode: 200,
+	}, nil
 }
 
 func main() {

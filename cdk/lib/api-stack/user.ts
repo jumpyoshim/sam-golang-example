@@ -21,10 +21,10 @@ export const buildUser = (
   }));
 
   const handler = new lambda.Function(stack, 'UserFunction', {
-    functionName: `User`,
+    functionName: `UserFunction`,
     runtime: lambda.Runtime.GO_1_X,
     handler: 'main',
-    code: lambda.Code.fromAsset('../build/funcs/user'),
+    code: lambda.Code.fromAsset('../funcs/user'),
     role: role,
   });
 
