@@ -9,8 +9,8 @@ export class APIStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const api = new apigateway.RestApi(this, "api", {
-      restApiName: "api",
+    const api = new apigateway.RestApi(this, "PrivateAPI", {
+      restApiName: "PrivateAPI",
     });
 
     api.root.addMethod('GET')

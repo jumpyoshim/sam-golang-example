@@ -1,11 +1,11 @@
 Resources:
-  apiC8550315:
+  PrivateAPI9413BB62:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Name: api
+      Name: PrivateAPI
     Metadata:
-      aws:cdk:path: api/api/Resource
-  apiCloudWatchRoleAC81D93E:
+      aws:cdk:path: api/PrivateAPI/Resource
+  PrivateAPICloudWatchRole2A8DEA89:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -22,70 +22,70 @@ Resources:
               - Ref: AWS::Partition
               - :iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs
     Metadata:
-      aws:cdk:path: api/api/CloudWatchRole/Resource
-  apiAccount57E28B43:
+      aws:cdk:path: api/PrivateAPI/CloudWatchRole/Resource
+  PrivateAPIAccount8462FFD2:
     Type: AWS::ApiGateway::Account
     Properties:
       CloudWatchRoleArn:
         Fn::GetAtt:
-          - apiCloudWatchRoleAC81D93E
+          - PrivateAPICloudWatchRole2A8DEA89
           - Arn
     DependsOn:
-      - apiC8550315
+      - PrivateAPI9413BB62
     Metadata:
-      aws:cdk:path: api/api/Account
-  apiDeployment149F1294afedaf16f5a192a0af0a2fe837e8a0ea:
+      aws:cdk:path: api/PrivateAPI/Account
+  PrivateAPIDeployment77CB1A5F932fce81939d4b9c793103c7454ab653:
     Type: AWS::ApiGateway::Deployment
     Properties:
       RestApiId:
-        Ref: apiC8550315
+        Ref: PrivateAPI9413BB62
       Description: Automatically created by the RestApi construct
     DependsOn:
-      - apiGETECF0BD67
-      - apiuserproxyANY5BB97033
-      - apiuserproxy1E92B772
-      - apiuserANY0FA3232B
-      - apiuserE5DA65CB
+      - PrivateAPIGETBD5B91AC
+      - PrivateAPIuserproxyANY7F6D4DAA
+      - PrivateAPIuserproxy485287B4
+      - PrivateAPIuserANY701DB3AC
+      - PrivateAPIuser302032AF
     Metadata:
-      aws:cdk:path: api/api/Deployment/Resource
-  apiDeploymentStageprod896C8101:
+      aws:cdk:path: api/PrivateAPI/Deployment/Resource
+  PrivateAPIDeploymentStageprod0F85C100:
     Type: AWS::ApiGateway::Stage
     Properties:
       RestApiId:
-        Ref: apiC8550315
+        Ref: PrivateAPI9413BB62
       DeploymentId:
-        Ref: apiDeployment149F1294afedaf16f5a192a0af0a2fe837e8a0ea
+        Ref: PrivateAPIDeployment77CB1A5F932fce81939d4b9c793103c7454ab653
       StageName: prod
     Metadata:
-      aws:cdk:path: api/api/DeploymentStage.prod/Resource
-  apiGETECF0BD67:
+      aws:cdk:path: api/PrivateAPI/DeploymentStage.prod/Resource
+  PrivateAPIGETBD5B91AC:
     Type: AWS::ApiGateway::Method
     Properties:
       HttpMethod: GET
       ResourceId:
         Fn::GetAtt:
-          - apiC8550315
+          - PrivateAPI9413BB62
           - RootResourceId
       RestApiId:
-        Ref: apiC8550315
+        Ref: PrivateAPI9413BB62
       AuthorizationType: NONE
       Integration:
         Type: MOCK
     Metadata:
-      aws:cdk:path: api/api/Default/GET/Resource
-  apiuserE5DA65CB:
+      aws:cdk:path: api/PrivateAPI/Default/GET/Resource
+  PrivateAPIuser302032AF:
     Type: AWS::ApiGateway::Resource
     Properties:
       ParentId:
         Fn::GetAtt:
-          - apiC8550315
+          - PrivateAPI9413BB62
           - RootResourceId
       PathPart: user
       RestApiId:
-        Ref: apiC8550315
+        Ref: PrivateAPI9413BB62
     Metadata:
-      aws:cdk:path: api/api/Default/user/Resource
-  apiuserANYApiPermissionapi4F59AA66ANYuser0E0217ED:
+      aws:cdk:path: api/PrivateAPI/Default/user/Resource
+  PrivateAPIuserANYApiPermissionapiPrivateAPICE51E625ANYuser51762E1C:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
@@ -104,13 +104,13 @@ Resources:
             - ":"
             - Ref: AWS::AccountId
             - ":"
-            - Ref: apiC8550315
+            - Ref: PrivateAPI9413BB62
             - /
-            - Ref: apiDeploymentStageprod896C8101
+            - Ref: PrivateAPIDeploymentStageprod0F85C100
             - /*/user
     Metadata:
-      aws:cdk:path: api/api/Default/user/ANY/ApiPermission.api4F59AA66.ANY..user
-  apiuserANYApiPermissionTestapi4F59AA66ANYuserF7268895:
+      aws:cdk:path: api/PrivateAPI/Default/user/ANY/ApiPermission.apiPrivateAPICE51E625.ANY..user
+  PrivateAPIuserANYApiPermissionTestapiPrivateAPICE51E625ANYuserD6E7DF06:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
@@ -129,18 +129,18 @@ Resources:
             - ":"
             - Ref: AWS::AccountId
             - ":"
-            - Ref: apiC8550315
+            - Ref: PrivateAPI9413BB62
             - /test-invoke-stage/*/user
     Metadata:
-      aws:cdk:path: api/api/Default/user/ANY/ApiPermission.Test.api4F59AA66.ANY..user
-  apiuserANY0FA3232B:
+      aws:cdk:path: api/PrivateAPI/Default/user/ANY/ApiPermission.Test.apiPrivateAPICE51E625.ANY..user
+  PrivateAPIuserANY701DB3AC:
     Type: AWS::ApiGateway::Method
     Properties:
       HttpMethod: ANY
       ResourceId:
-        Ref: apiuserE5DA65CB
+        Ref: PrivateAPIuser302032AF
       RestApiId:
-        Ref: apiC8550315
+        Ref: PrivateAPI9413BB62
       AuthorizationType: NONE
       Integration:
         IntegrationHttpMethod: POST
@@ -158,18 +158,18 @@ Resources:
                   - Arn
               - /invocations
     Metadata:
-      aws:cdk:path: api/api/Default/user/ANY/Resource
-  apiuserproxy1E92B772:
+      aws:cdk:path: api/PrivateAPI/Default/user/ANY/Resource
+  PrivateAPIuserproxy485287B4:
     Type: AWS::ApiGateway::Resource
     Properties:
       ParentId:
-        Ref: apiuserE5DA65CB
+        Ref: PrivateAPIuser302032AF
       PathPart: "{proxy+}"
       RestApiId:
-        Ref: apiC8550315
+        Ref: PrivateAPI9413BB62
     Metadata:
-      aws:cdk:path: api/api/Default/user/{proxy+}/Resource
-  apiuserproxyANYApiPermissionapi4F59AA66ANYuserproxy00369F2E:
+      aws:cdk:path: api/PrivateAPI/Default/user/{proxy+}/Resource
+  PrivateAPIuserproxyANYApiPermissionapiPrivateAPICE51E625ANYuserproxyE63C09F4:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
@@ -188,13 +188,13 @@ Resources:
             - ":"
             - Ref: AWS::AccountId
             - ":"
-            - Ref: apiC8550315
+            - Ref: PrivateAPI9413BB62
             - /
-            - Ref: apiDeploymentStageprod896C8101
+            - Ref: PrivateAPIDeploymentStageprod0F85C100
             - /*/user/*
     Metadata:
-      aws:cdk:path: api/api/Default/user/{proxy+}/ANY/ApiPermission.api4F59AA66.ANY..user.{proxy+}
-  apiuserproxyANYApiPermissionTestapi4F59AA66ANYuserproxy53EAEFBD:
+      aws:cdk:path: api/PrivateAPI/Default/user/{proxy+}/ANY/ApiPermission.apiPrivateAPICE51E625.ANY..user.{proxy+}
+  PrivateAPIuserproxyANYApiPermissionTestapiPrivateAPICE51E625ANYuserproxy5C42B2D5:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
@@ -213,18 +213,18 @@ Resources:
             - ":"
             - Ref: AWS::AccountId
             - ":"
-            - Ref: apiC8550315
+            - Ref: PrivateAPI9413BB62
             - /test-invoke-stage/*/user/*
     Metadata:
-      aws:cdk:path: api/api/Default/user/{proxy+}/ANY/ApiPermission.Test.api4F59AA66.ANY..user.{proxy+}
-  apiuserproxyANY5BB97033:
+      aws:cdk:path: api/PrivateAPI/Default/user/{proxy+}/ANY/ApiPermission.Test.apiPrivateAPICE51E625.ANY..user.{proxy+}
+  PrivateAPIuserproxyANY7F6D4DAA:
     Type: AWS::ApiGateway::Method
     Properties:
       HttpMethod: ANY
       ResourceId:
-        Ref: apiuserproxy1E92B772
+        Ref: PrivateAPIuserproxy485287B4
       RestApiId:
-        Ref: apiC8550315
+        Ref: PrivateAPI9413BB62
       AuthorizationType: NONE
       Integration:
         IntegrationHttpMethod: POST
@@ -242,8 +242,8 @@ Resources:
                   - Arn
               - /invocations
     Metadata:
-      aws:cdk:path: api/api/Default/user/{proxy+}/ANY/Resource
-  IssuesRoleC20FB3B7:
+      aws:cdk:path: api/PrivateAPI/Default/user/{proxy+}/ANY/Resource
+  UserRoleB7C3739B:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -270,8 +270,8 @@ Resources:
               - Ref: AWS::Partition
               - :iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy
     Metadata:
-      aws:cdk:path: api/IssuesRole/Resource
-  IssuesRoleDefaultPolicy793FF711:
+      aws:cdk:path: api/UserRole/Resource
+  UserRoleDefaultPolicyBC5E062B:
     Type: AWS::IAM::Policy
     Properties:
       PolicyDocument:
@@ -280,11 +280,11 @@ Resources:
             Effect: Allow
             Resource: "*"
         Version: "2012-10-17"
-      PolicyName: IssuesRoleDefaultPolicy793FF711
+      PolicyName: UserRoleDefaultPolicyBC5E062B
       Roles:
-        - Ref: IssuesRoleC20FB3B7
+        - Ref: UserRoleB7C3739B
     Metadata:
-      aws:cdk:path: api/IssuesRole/DefaultPolicy/Resource
+      aws:cdk:path: api/UserRole/DefaultPolicy/Resource
   UserFunction89BB1343:
     Type: AWS::Lambda::Function
     Properties:
@@ -307,13 +307,13 @@ Resources:
       Handler: main
       Role:
         Fn::GetAtt:
-          - IssuesRoleC20FB3B7
+          - UserRoleB7C3739B
           - Arn
       Runtime: go1.x
-      FunctionName: UserFunction
+      FunctionName: APIUser
     DependsOn:
-      - IssuesRoleDefaultPolicy793FF711
-      - IssuesRoleC20FB3B7
+      - UserRoleDefaultPolicyBC5E062B
+      - UserRoleB7C3739B
     Metadata:
       aws:cdk:path: api/UserFunction/Resource
       aws:asset:path: /Users/jumpyoshim/jumpyoshim/gin-lambda/funcs/user
@@ -326,18 +326,18 @@ Resources:
       aws:cdk:path: api/CDKMetadata/Default
     Condition: CDKMetadataAvailable
 Outputs:
-  apiEndpoint9349E63C:
+  PrivateAPIEndpointC10CA503:
     Value:
       Fn::Join:
         - ""
         - - https://
-          - Ref: apiC8550315
+          - Ref: PrivateAPI9413BB62
           - .execute-api.
           - Ref: AWS::Region
           - "."
           - Ref: AWS::URLSuffix
           - /
-          - Ref: apiDeploymentStageprod896C8101
+          - Ref: PrivateAPIDeploymentStageprod0F85C100
           - /
 Parameters:
   AssetParameters533319143e47908bafc15d35fee538c9ca55f5f645aa0741d1d48904b1aed911S3BucketED9E0067:

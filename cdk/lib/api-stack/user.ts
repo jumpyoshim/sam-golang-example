@@ -7,7 +7,7 @@ export const buildUser = (
   stack: cdk.Stack,
   path: apigateway.IResource,
 ) => {
-  const role = new iam.Role(stack, 'IssuesRole', {
+  const role = new iam.Role(stack, 'UserRole', {
     assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
     managedPolicies: [
       iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSLambdaBasicExecutionRole'),
@@ -21,7 +21,7 @@ export const buildUser = (
   }));
 
   const handler = new lambda.Function(stack, 'UserFunction', {
-    functionName: `UserFunction`,
+    functionName: `APIUser`,
     runtime: lambda.Runtime.GO_1_X,
     handler: 'main',
     code: lambda.Code.fromAsset('../funcs/user'),
