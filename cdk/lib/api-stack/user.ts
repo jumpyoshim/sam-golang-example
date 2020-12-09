@@ -24,7 +24,7 @@ export const buildUser = (
     functionName: `APIUser`,
     runtime: lambda.Runtime.GO_1_X,
     handler: 'main',
-    code: lambda.Code.fromAsset('../funcs/user'),
+    code: lambda.Code.fromAsset('../build/funcs/user'),
     role: role,
   });
 

@@ -24,6 +24,7 @@ func Handler(
 	if err != nil {
 		return out, err
 	}
+
 	return events.APIGatewayProxyResponse{
 		Body:       string(b),
 		StatusCode: 200,

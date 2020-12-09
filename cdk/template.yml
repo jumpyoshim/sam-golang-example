@@ -290,7 +290,7 @@ Resources:
     Properties:
       Code:
         S3Bucket:
-          Ref: AssetParameters533319143e47908bafc15d35fee538c9ca55f5f645aa0741d1d48904b1aed911S3BucketED9E0067
+          Ref: AssetParametersde2ba300d8c6288d7295830f51e3c5dffb729b248d0a4f7813ec733b66a776b1S3Bucket3537601B
         S3Key:
           Fn::Join:
             - ""
@@ -298,12 +298,12 @@ Resources:
                   - 0
                   - Fn::Split:
                       - "||"
-                      - Ref: AssetParameters533319143e47908bafc15d35fee538c9ca55f5f645aa0741d1d48904b1aed911S3VersionKeyAA1C772D
+                      - Ref: AssetParametersde2ba300d8c6288d7295830f51e3c5dffb729b248d0a4f7813ec733b66a776b1S3VersionKeyA0882A5C
               - Fn::Select:
                   - 1
                   - Fn::Split:
                       - "||"
-                      - Ref: AssetParameters533319143e47908bafc15d35fee538c9ca55f5f645aa0741d1d48904b1aed911S3VersionKeyAA1C772D
+                      - Ref: AssetParametersde2ba300d8c6288d7295830f51e3c5dffb729b248d0a4f7813ec733b66a776b1S3VersionKeyA0882A5C
       Handler: main
       Role:
         Fn::GetAtt:
@@ -316,7 +316,7 @@ Resources:
       - UserRoleB7C3739B
     Metadata:
       aws:cdk:path: api/UserFunction/Resource
-      aws:asset:path: /Users/jumpyoshim/jumpyoshim/gin-lambda/funcs/user
+      aws:asset:path: /Users/jumpyoshim/jumpyoshim/gin-lambda/build/funcs/user
       aws:asset:property: Code
   CDKMetadata:
     Type: AWS::CDK::Metadata
@@ -340,15 +340,15 @@ Outputs:
           - Ref: PrivateAPIDeploymentStageprod0F85C100
           - /
 Parameters:
-  AssetParameters533319143e47908bafc15d35fee538c9ca55f5f645aa0741d1d48904b1aed911S3BucketED9E0067:
+  AssetParametersde2ba300d8c6288d7295830f51e3c5dffb729b248d0a4f7813ec733b66a776b1S3Bucket3537601B:
     Type: String
-    Description: S3 bucket for asset "533319143e47908bafc15d35fee538c9ca55f5f645aa0741d1d48904b1aed911"
-  AssetParameters533319143e47908bafc15d35fee538c9ca55f5f645aa0741d1d48904b1aed911S3VersionKeyAA1C772D:
+    Description: S3 bucket for asset "de2ba300d8c6288d7295830f51e3c5dffb729b248d0a4f7813ec733b66a776b1"
+  AssetParametersde2ba300d8c6288d7295830f51e3c5dffb729b248d0a4f7813ec733b66a776b1S3VersionKeyA0882A5C:
     Type: String
-    Description: S3 key for asset version "533319143e47908bafc15d35fee538c9ca55f5f645aa0741d1d48904b1aed911"
-  AssetParameters533319143e47908bafc15d35fee538c9ca55f5f645aa0741d1d48904b1aed911ArtifactHashDAC7B3FD:
+    Description: S3 key for asset version "de2ba300d8c6288d7295830f51e3c5dffb729b248d0a4f7813ec733b66a776b1"
+  AssetParametersde2ba300d8c6288d7295830f51e3c5dffb729b248d0a4f7813ec733b66a776b1ArtifactHashE3EEF2F7:
     Type: String
-    Description: Artifact hash for asset "533319143e47908bafc15d35fee538c9ca55f5f645aa0741d1d48904b1aed911"
+    Description: Artifact hash for asset "de2ba300d8c6288d7295830f51e3c5dffb729b248d0a4f7813ec733b66a776b1"
 Conditions:
   CDKMetadataAvailable:
     Fn::Or:
