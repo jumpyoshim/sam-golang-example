@@ -1,4 +1,4 @@
-module gitlab.com/jumpyoshim/gin-lambda
+module gitlab.com/jumpyoshim/sam-goloang-example
 
 go 1.15
 
