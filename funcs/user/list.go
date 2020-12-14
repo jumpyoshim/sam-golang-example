@@ -2,24 +2,24 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"gitlab.com/jumpyoshim/sam-goloang-example/libs/domain/tweet"
+	"gitlab.com/jumpyoshim/sam-goloang-example/libs/domain/blog"
 )
 
-type tweetsInput struct {
+type blogsInput struct {
 	UserUID string `json:"uid"`
 }
 
-type tweetsOutput struct {
-	Items []tweet.Tweet `json:"items"`
+type blogsOutput struct {
+	Items []blog.Blog `json:"items"`
 }
 
-func tweets(c *gin.Context) {
+func blogs(c *gin.Context) {
 	var (
-		out tweetsOutput
+		out blogsOutput
 	)
 
-	out.Items = []tweet.Tweet{
-		{Text: "Hello, world!"},
+	out.Items = []blog.Blog{
+		{Title: "Hello, world!", Text: "Hello, world!"},
 	}
 
 	c.JSON(200, out)
