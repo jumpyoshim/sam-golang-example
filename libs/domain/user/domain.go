@@ -3,10 +3,12 @@ package user
 import (
 	"time"
 
+	"github.com/google/uuid"
 	"gitlab.com/jumpyoshim/sam-goloang-example/libs/domain/blog"
 )
 
 type User struct {
+	UUID      string      `json:"uuid" binding:"required"`
 	UID       string      `json:"uid" binding:"required,max=64"`
 	Email     string      `json:"email" binding:"required,max=256"`
 	Name      string      `json:"name" binding:"required,max=128"`
@@ -27,6 +29,8 @@ func NewUser(in *UserInput) *User {
 		Email: in.Email,
 		Name:  in.Name,
 	}
+
+	u.UUID = uuid.New().String()
 
 	now := time.Now()
 	u.CreatedAt = now.UnixNano()

@@ -4,13 +4,15 @@ import (
 	"time"
 
 	"github.com/gomarkdown/markdown"
+	"github.com/google/uuid"
 	"github.com/microcosm-cc/bluemonday"
 )
 
 type Blog struct {
+	UUID      string `json:"uuid" binding:"required"`
 	Title     string `json:"title" binding:"required,max=100"`
-	Text      string `json:"text" binding:"required,max=1000"`
-	TextHTML  string `json:"text_html" binding:"required"`
+	Text      string `json:"text" binding:"required,max=50000"`
+	TextHTML  string `json:"text_html"`
 	CreatedAt int64  `json:"created_at" binding:"required"`
 	UpdatedAt int64  `json:"updated_at" binding:"required"`
 }
@@ -26,8 +28,10 @@ func NewBlog(in *BlogInput) *Blog {
 		Text:  in.Text,
 	}
 
-	maybeUnsafeHTML := markdown.ToHTML(md, nil, nil)
-	html := bluemonday.UGCPolicy().SanitizeBytes(maybeUnsafeHTML)
+	b.UUID = uuid.New().String()
+
+	unsafeHTML := markdown.ToHTML(md, nil, nil)
+	html := bluemonday.UGCPolicy().SanitizeBytes(unsafeHTML)
 	b.TextHTML = html
 
 	now := time.Now()
