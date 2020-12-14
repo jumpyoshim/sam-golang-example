@@ -13,9 +13,9 @@ var ginLambda *ginadapter.GinLambda
 
 func init() {
 	r := gin.Default()
-	r.GET("/user/:uid", user)
-	r.GET("/user/:uid/blog", blogs)
-	r.GET("/user/:uid/blog/:uuid", blog)
+	r.GET("/user/:uid", userDetail)
+	r.GET("/user/:uid/blog", blogList)
+	r.GET("/user/:uid/blog/:uuid", blogDetail)
 
 	ginLambda = ginadapter.New(r)
 }

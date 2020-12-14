@@ -5,17 +5,17 @@ import (
 	"gitlab.com/jumpyoshim/sam-goloang-example/libs/domain/blog"
 )
 
-type blogsInput struct {
-	UserUID string `json:"uid"`
+type blogListInput struct {
+	UserUID string `json:"user_uid"`
 }
 
-type blogsOutput struct {
+type blogListOutput struct {
 	Items []blog.Blog `json:"items"`
 }
 
-func blogs(c *gin.Context) {
+func blogList(c *gin.Context) {
 	var (
-		out blogsOutput
+		out blogListOutput
 	)
 
 	out.Items = []blog.Blog{
