@@ -17,8 +17,9 @@ func userDetail(c *gin.Context) {
 	var (
 		out userDetailOutput
 	)
+	uid := c.Param("uid")
 
-	out.Item = user.User{UID: "foo", Email: "foo@example.com"}
+	out.Item = user.User{UID: uid, Email: "foo@example.com"}
 
 	c.JSON(200, out)
 }
