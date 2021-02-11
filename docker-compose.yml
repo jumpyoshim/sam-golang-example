@@ -2,12 +2,10 @@ version: '3'
 
 services:
   app:
-    build: .
-    command: >
-      bash -c "cd cdk
-      && npm run build
-      && npx cdk synth --no-staging api > cdk.out/template.yml
-      && sam local start-api -t cdk.out/template.yml --port 8800 --host 0.0.0.0"
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    command: echo "Sorry... It don't support. User `docker-compose run --rm app bash`"
     volumes:
       - .:/app
     ports:

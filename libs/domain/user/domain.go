@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"gitlab.com/jumpyoshim/sam-goloang-example/libs/domain/blog"
+	"gitlab.com/jumpyoshim/sam-goloang-example/libs/domain/item"
 )
 
 type User struct {
@@ -12,7 +12,7 @@ type User struct {
 	UID       string      `json:"uid" binding:"required,max=64"`
 	Email     string      `json:"email" binding:"required,max=256"`
 	Name      string      `json:"name" binding:"required,max=128"`
-	Blogs     []blog.Blog `json:"blogs" binding:"max=10000"`
+	Items     []item.Item `json:"items" binding:"max=100000"`
 	CreatedAt int64       `json:"created_at" binding:"required"`
 	UpdatedAt int64       `json:"updated_at" binding:"required"`
 }

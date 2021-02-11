@@ -1,3 +1,4 @@
 .vscode/
 build/
 cdk/template.yml
+.env
