@@ -4,28 +4,31 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"gitlab.com/jumpyoshim/sam-goloang-example/libs/domain/item"
+)
+
+const (
+	TableName = "user"
 )
 
 type User struct {
-	UUID      string      `json:"uuid" binding:"required"`
-	UID       string      `json:"uid" binding:"required,max=64"`
-	Email     string      `json:"email" binding:"required,max=256"`
-	Name      string      `json:"name" binding:"required,max=128"`
-	Items     []item.Item `json:"items" binding:"max=100000"`
-	CreatedAt int64       `json:"created_at" binding:"required"`
-	UpdatedAt int64       `json:"updated_at" binding:"required"`
+	UUID      string `json:"uuid" binding:"required"`
+	Email     string `json:"email" binding:"required,max=256"`
+	Name      string `json:"name" binding:"required,max=32"`
+	CreatedAt int64  `json:"created_at" binding:"required"`
+	UpdatedAt int64  `json:"updated_at" binding:"required"`
+}
+
+type UserKey struct {
+	UUID string `json:"uuid"`
 }
 
 type UserInput struct {
-	UID   string
 	Email string
 	Name  string
 }
 
 func NewUser(in *UserInput) *User {
 	u := &User{
-		UID:   in.UID,
 		Email: in.Email,
 		Name:  in.Name,
 	}
