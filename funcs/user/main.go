@@ -15,7 +15,6 @@ var (
 	ginLambda *ginadapter.GinLambda
 	ctx       context.Context
 	fctx      *fcontext.Context
-	isTest    bool
 )
 
 func init() {
@@ -26,10 +25,7 @@ func init() {
 }
 
 func Handler(c context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	ctx = c
-	if !isTest {
-		ctx = funcs.Init(ctx)
-	}
+	ctx = funcs.Init(c)
 	fctx = fcontext.Must(fcontext.FromContext(ctx))
 
 	return ginLambda.ProxyWithContext(ctx, req)

@@ -16,7 +16,6 @@ import (
 )
 
 func TestDetail(t *testing.T) {
-	isTest = true
 	ddb := dynamodbtest.Setup(dynamodbtest.SetupInput{})
 	ctx := fcontext.NewContext(
 		context.Background(),

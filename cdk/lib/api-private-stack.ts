@@ -3,9 +3,9 @@ import * as cdk from '@aws-cdk/core';
 
 import {
   buildUser,
-} from './api-stack/index'
+} from './api-private-stack/index'
 
-export class APIStack extends cdk.Stack {
+export class PrivateAPIStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 

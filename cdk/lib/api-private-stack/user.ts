@@ -21,11 +21,17 @@ export const buildUser = (
   }));
 
   const handler = new lambda.Function(stack, 'UserFunction', {
-    functionName: `APIUser`,
+    functionName: `PrivateAPIUser`,
     runtime: lambda.Runtime.GO_1_X,
     handler: 'main',
     code: lambda.Code.fromAsset('../build/funcs/user'),
+    memorySize: 512,
+    timeout: cdk.Duration.seconds(120),
+    tracing: lambda.Tracing.ACTIVE,
     role: role,
+    environment: {
+      APP_ENV: "prod"
+    }
   });
 
   const resource = path.addResource('user')
