@@ -19,6 +19,7 @@ var (
 
 func init() {
 	r := gin.Default()
+	r.POST("/user", create)
 	r.GET("/user/:uuid", detail)
 
 	ginLambda = ginadapter.New(r)

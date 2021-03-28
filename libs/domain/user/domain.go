@@ -18,13 +18,17 @@ type User struct {
 	UpdatedAt int64  `json:"updated_at" binding:"required"`
 }
 
-type UserKey struct {
+type UserEmailKey struct {
+	Email string `json:"email"`
+}
+
+type UserUUIDKey struct {
 	UUID string `json:"uuid"`
 }
 
 type UserInput struct {
-	Email string
-	Name  string
+	Email string `json:"email"`
+	Name  string `json:"name"`
 }
 
 func NewUser(in *UserInput) *User {

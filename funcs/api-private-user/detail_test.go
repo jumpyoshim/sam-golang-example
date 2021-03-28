@@ -7,16 +7,22 @@ import (
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/stretchr/testify/assert"
 	"gitlab.com/jumpyoshim/sam-goloang-example/libs/domain/user"
 	"gitlab.com/jumpyoshim/sam-goloang-example/libs/domain/user/repo"
 	"gitlab.com/jumpyoshim/sam-goloang-example/libs/funcs"
 	"gitlab.com/jumpyoshim/sam-goloang-example/libs/funcs/fcontext"
 	"gitlab.com/jumpyoshim/sam-goloang-example/libs/services/dynamodb/dynamodbtest"
+	"gitlab.com/jumpyoshim/sam-goloang-example/libs/services/dynamodb/dynamodbtest/schema"
 )
 
 func TestDetail(t *testing.T) {
-	ddb := dynamodbtest.Setup(dynamodbtest.SetupInput{})
+	ddb := dynamodbtest.Setup(dynamodbtest.SetupInput{
+		Tables: map[string]*dynamodb.CreateTableInput{
+			schema.TableNameUser: schema.User,
+		},
+	})
 	ctx := fcontext.NewContext(
 		context.Background(),
 		&fcontext.Context{

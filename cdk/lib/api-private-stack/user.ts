@@ -24,7 +24,7 @@ export const buildUser = (
     functionName: `PrivateAPIUser`,
     runtime: lambda.Runtime.GO_1_X,
     handler: 'main',
-    code: lambda.Code.fromAsset('../build/funcs/user'),
+    code: lambda.Code.fromAsset('../build/funcs/api-private-user'),
     memorySize: 512,
     timeout: cdk.Duration.seconds(120),
     tracing: lambda.Tracing.ACTIVE,

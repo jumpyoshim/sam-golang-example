@@ -7,10 +7,6 @@ import (
 	"gitlab.com/jumpyoshim/sam-goloang-example/libs/funcs"
 )
 
-type detailInput struct {
-	UUID string `json:"uuid"`
-}
-
 type detailOutput struct {
 	UUID      string `json:"uuid"`
 	Email     string `json:"email"`
@@ -26,7 +22,7 @@ func detail(c *gin.Context) {
 	)
 
 	uuid := c.Param("uuid")
-	key := user.UserKey{UUID: uuid}
+	key := user.UserUUIDKey{UUID: uuid}
 
 	u, err := repo.GetItem(ctx, fctx.Svc.DynamoDB, key)
 	if err != nil {

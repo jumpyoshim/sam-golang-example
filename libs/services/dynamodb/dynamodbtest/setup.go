@@ -2,6 +2,7 @@ package dynamodbtest
 
 import (
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+	ddb "gitlab.com/jumpyoshim/sam-goloang-example/libs/services/dynamodb"
 	"gitlab.com/jumpyoshim/sam-goloang-example/libs/services/dynamodb/dynamodbtest/schema"
 )
 
@@ -26,7 +27,7 @@ func Setup(in SetupInput) (svc *dynamodb.DynamoDB) {
 		}
 	}
 
-	err := ResetTables(svc, tables)
+	err := ddb.ResetTables(svc, tables)
 	if err != nil {
 		panic(err)
 	}

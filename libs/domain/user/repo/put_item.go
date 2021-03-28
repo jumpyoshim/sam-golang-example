@@ -2,6 +2,7 @@ package repo
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
@@ -10,32 +11,23 @@ import (
 	"gitlab.com/jumpyoshim/sam-goloang-example/libs/domain/user"
 )
 
-func GetItem(
+func PutItem(
 	ctx context.Context,
 	svc dynamodbiface.DynamoDBAPI,
-	in user.UserUUIDKey,
-) (out *user.User, err error) {
-	key, err := dynamodbattribute.MarshalMap(in)
+	in *user.User,
+) (err error) {
+	item, err := dynamodbattribute.MarshalMap(in)
 	if err != nil {
-		return out, err
+		return fmt.Errorf("dynamodbattribute.MarshalMap: %+v", err)
 	}
 
-	o, err := svc.GetItemWithContext(ctx, &dynamodb.GetItemInput{
+	_, err = svc.PutItemWithContext(ctx, &dynamodb.PutItemInput{
 		TableName: aws.String(user.TableName),
-		Key:       key,
+		Item:      item,
 	})
 	if err != nil {
-		return out, err
+		return fmt.Errorf("svc.PutItemWithContext: %+v", err)
 	}
 
-	if o == nil || len(o.Item) == 0 {
-		return out, nil
-	}
-
-	err = dynamodbattribute.UnmarshalMap(o.Item, &out)
-	if err != nil {
-		return out, err
-	}
-
-	return out, err
+	return err
 }
