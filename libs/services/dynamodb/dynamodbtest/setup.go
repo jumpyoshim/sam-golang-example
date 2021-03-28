@@ -23,7 +23,7 @@ func Setup(in SetupInput) (svc *dynamodb.DynamoDB) {
 
 	if tables == nil {
 		tables = map[string]*dynamodb.CreateTableInput{
-			*schema.User.TableName: schema.User,
+			schema.TableNameUser: schema.User,
 		}
 	}
 

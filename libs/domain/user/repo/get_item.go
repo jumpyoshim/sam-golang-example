@@ -13,7 +13,7 @@ import (
 func GetItem(
 	ctx context.Context,
 	svc dynamodbiface.DynamoDBAPI,
-	in user.UserUUIDKey,
+	in user.UserKey,
 ) (out *user.User, err error) {
 	key, err := dynamodbattribute.MarshalMap(in)
 	if err != nil {

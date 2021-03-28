@@ -22,7 +22,7 @@ func detail(c *gin.Context) {
 	)
 
 	uuid := c.Param("uuid")
-	key := user.UserUUIDKey{UUID: uuid}
+	key := user.UserKey{UUID: uuid}
 
 	u, err := repo.GetItem(ctx, fctx.Svc.DynamoDB, key)
 	if err != nil {

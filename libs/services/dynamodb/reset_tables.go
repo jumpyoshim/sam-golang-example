@@ -16,13 +16,13 @@ func ResetTables(svc dynamodbiface.DynamoDBAPI, tables map[string]*dynamodb.Crea
 		_, err = svc.DeleteTable(&dynamodb.DeleteTableInput{TableName: table.TableName})
 		if err != nil {
 			if _, ok := err.(*dynamodb.ResourceNotFoundException); !ok {
-				return fmt.Errorf("DeleteTable: %+v", err)
+				return fmt.Errorf("svc.DeleteTable: %+v", err)
 			}
 		}
 
 		_, err = svc.CreateTable(table)
 		if err != nil {
-			return fmt.Errorf("CreateTable: %+v", err)
+			return fmt.Errorf("svc.CreateTable: %+v", err)
 		}
 	}
 

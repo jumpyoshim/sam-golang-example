@@ -18,11 +18,7 @@ type User struct {
 	UpdatedAt int64  `json:"updated_at" binding:"required"`
 }
 
-type UserEmailKey struct {
-	Email string `json:"email"`
-}
-
-type UserUUIDKey struct {
+type UserKey struct {
 	UUID string `json:"uuid"`
 }
 
